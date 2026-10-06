@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #fafafa;
+  --foreground: #18181b;
+  --skeleton-surface: #f4f4f5;
+  --skeleton-base: #e4e4e7;
+  --skeleton-highlight: rgb(255 255 255 / 0.45);
+  --hero-surface: #ffffff;
+  --hero-border: #e4e4e7;
+  --hero-title: #09090b;
+  --hero-copy: #71717a;
+}
+
+:root.light {
+  --background: #fafafa;
+  --foreground: #18181b;
+  color-scheme: light;
+  --skeleton-surface: #f4f4f5;
+  --skeleton-base: #e4e4e7;
+  --skeleton-highlight: rgb(255 255 255 / 0.45);
+  --hero-surface: #ffffff;
+  --hero-border: #e4e4e7;
+  --hero-title: #09090b;
+  --hero-copy: #71717a;
+}
+
+:root.dark {
+  --background: #09090b;
+  --foreground: #f4f4f5;
+  color-scheme: dark;
+  --skeleton-surface: #18181b;
+  --skeleton-base: #27272a;
+  --skeleton-highlight: rgb(255 255 255 / 0.05);
+  --hero-surface: #18181b;
+  --hero-border: #27272a;
+  --hero-title: #ffffff;
+  --hero-copy: #a1a1aa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-vazirmatn);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    --background: #09090b;
+    --foreground: #f4f4f5;
+    --skeleton-surface: #18181b;
+    --skeleton-base: #27272a;
+    --skeleton-highlight: rgb(255 255 255 / 0.05);
+    --hero-surface: #18181b;
+    --hero-border: #27272a;
+    --hero-title: #ffffff;
+    --hero-copy: #a1a1aa;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: rgb(37 99 235 / 0.18);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-surface { background-color: var(--skeleton-surface); }
+
+.skeleton-base {
+  background-color: var(--skeleton-base);
+}
+
+.skeleton-shimmer::before {
+  background: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent);
+}
+
+.skeleton-card {
+  background-color: var(--background);
+  border-color: color-mix(in srgb, var(--foreground) 12%, transparent);
+}
+
+.hero-surface { background-color: var(--hero-surface); border-color: var(--hero-border); }
+.hero-title { color: var(--hero-title); }
+.hero-copy { color: var(--hero-copy); }
